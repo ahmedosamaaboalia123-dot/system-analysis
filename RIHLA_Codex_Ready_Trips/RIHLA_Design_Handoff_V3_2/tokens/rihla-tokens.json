@@ -1,0 +1,24 @@
+{
+  "name": "RIHLA Design System",
+  "referenceVersion": "V3.2",
+  "status": "approved-design-reference",
+  "colors": {
+    "primary": "#344B46",
+    "primaryHover": "#253A35",
+    "accent": "#63877C",
+    "softGreen": "#EDF3EF",
+    "background": "#F8F9F8",
+    "border": "#DFE6E1",
+    "surface": "#FFFFFF",
+    "appShell": "#E4E9E6"
+  },
+  "typography": {"family": "Almarai", "weights": [300,400,700,800], "direction": "rtl", "bodyFontPx": 14},
+  "layout": {"headerHeightPx": 66,"sidebarCollapsedPx": 76,"sidebarExpandedPx": 254,"workspaceTopRadiusPx": 22,"workspaceTopRadiusMobilePx": 16,"workspaceScrolledRadiusPx": 0,"radiusScrollThresholdPx": 2},
+  "alertStates": {
+    "success": {"background":"#DCEFE2","border":"#A9D4BA","rightStripe":"#27734B"},
+    "info": {"background":"#E1EEF8","border":"#B2D0E8","rightStripe":"#3479AC"},
+    "warning": {"background":"#FFF0CF","border":"#F0D298","rightStripe":"#AF741B"},
+    "error": {"background":"#FBE1E3","border":"#EBB0B7","rightStripe":"#C13F50"}
+  },
+  "assets": {"logo":"provisional","sidebarIcons":"illustrative-not-authoritative"}
+}

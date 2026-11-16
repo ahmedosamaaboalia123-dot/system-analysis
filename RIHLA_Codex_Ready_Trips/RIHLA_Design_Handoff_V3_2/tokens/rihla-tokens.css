@@ -1,0 +1,40 @@
+/* RIHLA V3.2 — approved UI tokens. Keep semantic states distinct from brand. */
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
+
+:root {
+  --primary: #344B46;
+  --primary-hover: #253A35;
+  --accent: #63877C;
+  --soft-green: #EDF3EF;
+  --background: #F8F9F8;
+  --border: #DFE6E1;
+  --surface: #FFFFFF;
+  --app-shell: #E4E9E6;
+  --font-family-ui: 'Almarai', Arial, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --shell-header-height: 66px;
+  --sidebar-collapsed-width: 76px;
+  --sidebar-expanded-width: 254px;
+  --workspace-radius-top: 22px;
+  --workspace-radius-top-mobile: 16px;
+  --workspace-radius-scrolled: 0px;
+  --radius-control: 9px;
+  --radius-card: 15px;
+  --spacing-unit: 4px;
+  /* Semantic alerts — intentionally outside core brand palette. */
+  --alert-success-bg: #DCEFE2;
+  --alert-success-border: #A9D4BA;
+  --alert-success-stripe: #27734B;
+  --alert-info-bg: #E1EEF8;
+  --alert-info-border: #B2D0E8;
+  --alert-info-stripe: #3479AC;
+  --alert-warning-bg: #FFF0CF;
+  --alert-warning-border: #F0D298;
+  --alert-warning-stripe: #AF741B;
+  --alert-error-bg: #FBE1E3;
+  --alert-error-border: #EBB0B7;
+  --alert-error-stripe: #C13F50;
+}

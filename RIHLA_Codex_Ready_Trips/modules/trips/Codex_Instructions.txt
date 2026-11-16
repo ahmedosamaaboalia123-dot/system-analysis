@@ -1,0 +1,70 @@
+أنت Codex، مهندس Frontend تنفذ نموذجاً وظيفياً تفاعلياً لموديول «الرحلات» من ERP عربي باسم «رحلة».
+
+## 0. ملفات المرجع وترتيب السلطة
+اقرأ أولاً:
+1) User_Story.txt: القصص ومعايير القبول للـUI.
+2) مستند مواصفات الرحلات الموحّد إذا أُرفق (موديويل الرحلات(1).txt هو اسم المرجع الأصلي؛ النسخة الموحدة المرجع التفصيلي للمحتوى).
+3) QA_Checklist.txt: اختبارات القبول.
+4) ../../RIHLA_Design_Handoff_V3_2/AGENTS.md + tokens/ + docs/: الهوية V3.2 المعتمدة.
+5) ../../START_CODEX_HERE.md: تعليمات المهمة الكاملة.
+المرجع الأعلى للمظهر والسلوك البصري هو Design System V3.2 Graphite، وليس ألوان النسخ القديمة.
+لا تخترع قواعد أعمال حيث توجد قرارات معلقة. وثق أي سلوك مؤقت في التقرير.
+
+## 1. الهدف
+نفذ وحدة Trips كاملة كنموذج HTML Functional Prototype يشبه نظاماً يعمل فعلياً من منظور المستخدم، لكن دون Backend أو API حقيقي. يجب أن تعمل الصفحات، التنقلات، الجداول، الفلاتر، المودالات، النماذج، التحقق من البيانات، التعديلات، الربط التجريبي، التنبيهات والحسابات التفاعلية.
+
+## 2. المخرجات والترتيب الإلزامي
+المشروع داخل modules/trips/:
+- User_Story.txt (مرجع ولا تغير قراراته دون مراجعة)
+- Module_Report.md (تحديث بعد كل مرحلة: implemented / simulated / open decisions / limitations)
+- code/index.html (ملف HTML واحد self-contained يجمع markup + CSS + JS؛ لا React ولا Build Step)
+- QA_Checklist.txt
+لا تنشئ ملفات دعم أخرى إلا إذا توجد حاجة تقنية فعلية مع توثيقها. حافظ على أسماء ملفات المتطلبات الأصلية حرفياً إذا نسختها.
+
+## 3. معمارية التنفيذ داخل HTML واحد
+- CSS variables للألوان والفراغات والـtypography؛ classes reusable.
+- vanilla JavaScript منظّم إلى: state, mock fixtures, selectors/computed, validation, actions, components, render functions, events, persistence.
+- حالة واحدة مركزية؛ DOM يتحدث عبر render بعد التغييرات. لا تضع Mock Counters ثابتة لا تتأثر بالأحداث.
+- بيانات Mock اصطناعية ومتنوعة: حج/عمرة، VIP/عادية، 6 حالات، مجموعات طيران، اتفاقيات فنادق، مشرفين، أفراد، طلبات بوابة، أسر ومجموعات بلا رحلة.
+- localStorage لحفظ demo state بعد التحديث؛ زر Reset Demo Data مع تأكيد قبل مسح بيانات المتصفح.
+- استخدم معرفات مستقرة مستقلة عن array index؛ لا تضاعف الحجز أو المقاعد عند إعادة الربط أو التحويل.
+- لا تستخدم network calls أو external APIs. يمكن استيراد خط Almarai من Google Fonts مع fallbacks، واجعل الشاشة تظل صالحة بدون اتصال.
+
+## 4. الهوية
+RTL + Arabic. Almarai. **اعتمد Graphite V3.2 من `RIHLA_Design_Handoff_V3_2/tokens/rihla-tokens.css` و`.json` فقط**؛ Primary #344B46, Hover #253A35, Accent #63877C, Soft #EDF3EF, App Shell #E4E9E6, Surface #FFFFFF. ممنوع استخدام Forest Green القديمة (#205B45).
+Sidebar قابل للطي؛ لا gold. تنبيهات شريط جانبي ملون. Tabs الرئيسية Active أخضر ثابت. جداول بحث/فلترة/فرز/تخصيص أعمدة وكثافة قدر الإمكان بحسب القبول السابق. Error داخل input. Modals وmulti-step forms جيدة الإتاحة.
+
+## 5. الوحدات داخل الرحلات — ترتيب التطوير
+P1) Shell + sidebar + dashboard + create real/demo trip + trip details navigation.
+P2) Settings: flights/hotels/supervisors/transport/timeline/purchases/pricing/additional settings/notes.
+P3) Monitoring KPIs, consistency warnings, document alerts.
+P4) People registration, client lookup, documents, families, accommodation, groups, portal applications.
+P5) Transfers, price differences, state persistence; responsive / keyboard / QA cleanup.
+اكتب بعد كل مرحلة في Module_Report ما تم فعلياً؛ لا تعلن «كامل» إذا بقيت Stories بلا تنفيذ.
+
+## 6. قواعد محاكاة حاسمة
+- المقاعد الخارجية لا تضاف إلى رصيد مقاعد طيران الشركة ولا تخصم منه.
+- سعة الفنادق بغرف متعددة محسوبة عدد الغرف × السرير؛ مكة والمدينة لا تجمعان تلقائياً لإنتاج سعة مسافرين واحدة.
+- المواصلات الداخلية أو ربط حجز مستقل قرار مفتوح؛ وفر تجربة عرض مع وسم placeholder.
+- شروط «تجهيز مكتمل»، قواعد إلغاء الرحلة، تحويل الرحلة التجريبية، حساب السعة متعددة المسارات، صلاحيات الحذف بعد الحجز = OPEN. لا تنفذ قرار إنتاجي بصمت.
+- عند تحويل مسافر، حدّث الوجهة والمصدر كوحدة واحدة في الذاكرة بعد اجتياز التحقق؛ عند الفشل لا تغير المصدر.
+- اكتمال المستندات: اكتب في التقرير تحديداً ما الحقول المؤقتة التي احتسبتها.
+- المعاملات المالية Mock only؛ لا تسوّق التحويلات أو الفواتير كترحيل محاسبي فعلي.
+
+## 7. معايير جودة صارمة
+- كل CTA له onClick حقيقي أو مُعطّل مع سبب. لا dead buttons.
+- استخدم DOM APIs أو sanitization مناسباً للبيانات المدخلة، لا تحقن user input في innerHTML دون escaping.
+- Validation للأرقام والتواريخ والأعداد غير السالبة وسعر × كمية، ورسائل خطأ عربية دقيقة.
+- حالات loading/empty/error/success، عدم فقد المدخلات دون حفظ متعمد، keyboard focus وEscape.
+- لا تعتمد على CDN لمكتبات JavaScript أساسية؛ النموذج يعمل بفتح code/index.html مباشرة.
+- لا تضع بيانات حقيقية لعملاء أو أرقام هوية/جوازات حقيقية في الـfixtures.
+- قابليّة الاختبار: اجعل demo fixtures وحسابات selectors مستقلة قدر الإمكان وعلامات UI يمكن التعرف إليها بسهولة.
+
+## 8. الاختبار والتسليم
+نفّذ checklist المرفقة كاملة. إذا أدوات اختبار المتصفح غير متوفرة، لا تدع نجاح اختبارات لم تنفذها؛ سجّل NOT RUN. التقط bugs وأصلحها قبل التسليم. لا تدخل تعديلات خارج Module Trips.
+قدّم ملخصاً من 5 أقسام: ما نُفّذ؛ كيف نشغله؛ ما اختُبر ونتيجته؛ ما لم يُنفذ؛ القرارات المعلقة.
+
+## 9. Git workflow
+لا تدفع مباشرة إلى main دون طلب صريح. اعمل branch مخصصاً `feature/trips-ui-prototype` إن كانت أدوات git مهيأة؛ جهز commit/PR للمراجعة. لا ترفع بيانات حساسة أو ملفات كبيرة دون حاجة.
+
+ابدأ بالمرحلة P1 ثم نفّذ P2–P5 والاختبارات والتسليم في **نفس مهمة Codex دون انتظار تأكيد بين المراحل**. وثّق التقدم بعد كل مرحلة. لا تتوقف بسبب نقص معلومة غير حاسمة لتصميم الـUI، وضع Demo-only assumption في التقرير. لا تدّع اكتمالًا كاملًا عند وجود حالات BLOCKED أو NOT RUN. في حال كان القرار حاسماً لسلامة منطق المحاكاة، اعرض حالة Blocked في الـUI بدلاً من قاعدة مخترعة.

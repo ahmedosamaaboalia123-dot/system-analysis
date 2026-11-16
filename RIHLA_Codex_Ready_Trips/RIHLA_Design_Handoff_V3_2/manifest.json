@@ -1,0 +1,23 @@
+{
+  "title": "RIHLA Design System Implementation Handoff",
+  "reference_version": "V3.2",
+  "generated_at": "2026-11-16",
+  "design_status": "approved",
+  "application": "Windows desktop-oriented Arabic RTL",
+  "source_html_sha256": "1598dbd920a9de9ee8a577f944d105139764867c74987c705c3e4324bc0a2133",
+  "logo_status": "provisional",
+  "sidebar_icons_status": "placeholders",
+  "included_files": [
+    "AGENTS.md",
+    "README.md",
+    "checklists/ACCEPTANCE_TESTS.md",
+    "docs/01_DESIGN_DECISIONS.md",
+    "docs/02_COMPONENTS_AND_BEHAVIOR.md",
+    "docs/03_IMPLEMENTATION_PLAN.md",
+    "docs/04_HANDOFF_REPORT.md",
+    "docs/05_CODEX_START_PROMPT.md",
+    "reference/RIHLA_Design_System_V3_2_REFERENCE.html",
+    "tokens/rihla-tokens.css",
+    "tokens/rihla-tokens.json"
+  ]
+}
